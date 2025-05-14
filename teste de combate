@@ -1,0 +1,24 @@
+player = {
+    "nome": input("qual seu nome: ",),
+    "vida": 100,
+    "dano": 5,
+}
+while True:
+    print(player["nome"],'vida: ', player["vida"], 'dano: ', player["dano"])
+
+    npc = [
+        {"nome": "monstro", "vida": 100, "dano": 2, "exp": 2},
+    ]
+    atack = player["vida"] - npc[0]['dano']
+
+    luta = int(input("qual npc voce quer lutar "))
+
+    if luta == 1:
+        print('vc esta com', atack, 'de vida')
+        if player["vida"] <=0:
+          print('perdeu')
+        elif player["vida"] >= 0:
+          print('ganhou')
+          lv = player["vida"] + npc[0]["exp"], player["dano"] + npc[0]["exp"]
+          print(lv)
+          player["vida"], player["dano"] = lv
