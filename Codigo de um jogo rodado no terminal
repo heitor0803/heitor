@@ -1,0 +1,66 @@
+p1 = {
+    "vida": 500,
+    "dano": 10,
+    "exp": 0
+    }
+    
+v = 500
+d = 10
+lvl = 10
+while True:
+    npc = [
+        {"nome": "slime", "vida": 100, "dano": 10, "exp": 5},
+        {"nome": "boss", "vida": 900, "dano": 30,"exp": 20},
+    ]
+    
+    print("sua vida:", p1["vida"],"seu dano", p1["dano"],"seu exp:", p1["exp"])
+
+    esc = int(input('qual npc vc quer lutar 0: Slime, 1:boss '))
+    
+    while True:
+        import time
+        time.sleep(0.4)
+        if esc == 0 or 1:    #acredito que não nessecitava desse IF
+            pvp = p1["vida"] - npc[esc]["dano"]
+            p1["vida"] = pvp
+            print("sua vida:", p1["vida"])
+            
+            t2 = input("precione A para atackar ")
+            import time
+            time.sleep(0.4)
+            if t2 == "a" or "A":
+                pvp2 = npc[esc]["vida"] - p1["dano"]
+                npc[esc]["vida"] = pvp2
+                print("vida do", npc[esc]["nome"],":", npc[esc]["vida"] )
+                
+                if npc[esc]["vida"] <= 0:
+                    print("parabens você ganhou")
+                    vict = p1["exp"] + npc[esc]["exp"]
+                    
+                    p1["exp"] = vict
+                    p1["vida"]= v
+                    p1["dano"]= d
+                     
+                    break
+                elif p1["vida"] <= 0:
+                    print("Você perdeu, não tera reconpensas")
+                    p1["vida"]= v
+                    p1["dano"]= d
+                    break
+                
+
+    if p1["exp"] >= lvl:
+        print("você evoluiu ")
+        
+        v = p1["vida"] + 40
+        d = p1["dano"] + 5
+        p1["vida"] = v
+        p1["dano"] = d
+        
+        evo = p1["exp"] - lvl
+        p1["exp"] = evo
+        
+        evo2 = lvl * 1.5
+        lvl = evo2
+        
+        print("seus atributos são: Vida:", p1["vida"], "dano:", p1["dano"])
