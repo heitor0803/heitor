@@ -3,24 +3,32 @@ p1 = {
     "dano": 10,
     "exp": 0
     }
-    
+
 v = 500
 d = 10
 lvl = 10
 while True:
     npc = [
         {"nome": "slime", "vida": 100, "dano": 10, "exp": 5},
-        {"nome": "boss", "vida": 900, "dano": 30,"exp": 20},
+        {"nome": "mago", "vida": 300, "dano": 9, "exp": 10},
+        {"nome": "guerreiro", "vida": 350, "dano": 20, "exp": 13},
+        {"nome": "soldado", "vida": 600, "dano": 15, "exp": 17},
+        {"nome": "boss", "vida": 900, "dano": 30,"exp": 25},
     ]
-    
     print("sua vida:", p1["vida"],"seu dano", p1["dano"],"seu exp:", p1["exp"])
-
-    esc = int(input('qual npc vc quer lutar 0: Slime, 1:boss '))
+    print(f'esses são os inimigos')
+    
+    for i in range(len(npc)):
+        print(npc[i]["nome"])
+        
+    
+    esc= int(input('qual desses vc quer lutar de 0 a 5'))
     
     while True:
         import time
         time.sleep(0.4)
         if esc == 0 or 1:    #acredito que não nessecitava desse IF
+        
             pvp = p1["vida"] - npc[esc]["dano"]
             p1["vida"] = pvp
             print("sua vida:", p1["vida"])
@@ -29,6 +37,7 @@ while True:
             import time
             time.sleep(0.4)
             if t2 == "a" or "A":
+                
                 pvp2 = npc[esc]["vida"] - p1["dano"]
                 npc[esc]["vida"] = pvp2
                 print("vida do", npc[esc]["nome"],":", npc[esc]["vida"] )
