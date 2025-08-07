@@ -10,52 +10,54 @@ lvl = 10
 while True:
     npc = [
         {"nome": "slime", "vida": 100, "dano": 10, "exp": 5},
-        {"nome": "mago", "vida": 300, "dano": 9, "exp": 10},
-        {"nome": "guerreiro", "vida": 350, "dano": 20, "exp": 13},
-        {"nome": "soldado", "vida": 600, "dano": 15, "exp": 17},
-        {"nome": "boss", "vida": 900, "dano": 30,"exp": 25},
+        {"nome": "mago", "vida": 150, "dano": 30, "exp": 10},
+        {"nome": "guerreiro", "vida": 100, "dano": 50, "exp": 13},
+        {"nome": "soldado", "vida": 200, "dano": 35, "exp": 17},
+        {"nome": "boss", "vida": 400, "dano": 50,"exp": 25},
     ]
+    
+    con = -1
+    
     print("sua vida:", p1["vida"],"seu dano", p1["dano"],"seu exp:", p1["exp"])
-    print(f'esses são os inimigos')
-    
+    print('npcs: ')
     for i in range(len(npc)):
-        print(npc[i]["nome"])
-        
+        con = con + 1
+        print(con,":", npc[i]["nome"],":","vida:", npc[i]["vida"],"dano:", npc[i]["dano"], )
     
-    esc= int(input('qual desses vc quer lutar de 0 a 5'))
+    esc = int(input('Qual desses npcs você quer lutar escolha: '))
+    
     
     while True:
         import time
         time.sleep(0.4)
-        if esc == 0 or 1:    #acredito que não nessecitava desse IF
         
-            pvp = p1["vida"] - npc[esc]["dano"]
-            p1["vida"] = pvp
-            print("sua vida:", p1["vida"])
+        pvp = p1["vida"] - npc[esc]["dano"]
+        p1["vida"] = pvp
+        print("sua vida:", p1["vida"])
+        
+        t2 = input("pressione A para atacar ")
+        import time
+        time.sleep(0.4)
+        if t2 == "a" or t2 == "A":
             
-            t2 = input("precione A para atackar ")
-            import time
-            time.sleep(0.4)
-            if t2 == "a" or "A":
+            pvp2 = npc[esc]["vida"] - p1["dano"]
+            npc[esc]["vida"] = pvp2
+            print("vida do", npc[esc]["nome"],":", npc[esc]["vida"] )
+            
+            if npc[esc]["vida"] <= 0:
+                print("parabens você ganhou")
+                vict = p1["exp"] + npc[esc]["exp"]
                 
-                pvp2 = npc[esc]["vida"] - p1["dano"]
-                npc[esc]["vida"] = pvp2
-                print("vida do", npc[esc]["nome"],":", npc[esc]["vida"] )
-                
-                if npc[esc]["vida"] <= 0:
-                    print("parabens você ganhou")
-                    vict = p1["exp"] + npc[esc]["exp"]
-                    
-                    p1["exp"] = vict
-                    p1["vida"]= v
-                    p1["dano"]= d
-                     
-                    break
-                elif p1["vida"] <= 0:
-                    print("Você perdeu, não tera reconpensas")
-                    p1["vida"]= v
-                    p1["dano"]= d
-                    break
+                p1["exp"] = vict
+                p1["vida"]= v
+                p1["dano"]= d
+                 
+                break
+            elif p1["vida"] <= 0:
+                print("Você perdeu, não tera recompensas")
+                p1["vida"]= v
+                p1["dano"]= d
+                break
                 
 
     if p1["exp"] >= lvl:
@@ -71,5 +73,10 @@ while True:
         
         evo2 = lvl * 1.5
         lvl = evo2
+        print(f'para seu proximo lvl você precisa de {lvl} exp')
         
         print("seus atributos são: Vida:", p1["vida"], "dano:", p1["dano"])
+        
+        
+        
+    
