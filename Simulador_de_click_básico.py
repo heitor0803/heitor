@@ -1,10 +1,10 @@
 import customtkinter as ctk
-from b import *
 msg = 0
 boost = 1
 boost_pago = False
 aclk_pago = False
 Valor = 10
+Valor_auto = 50
 def cl():  
     global msg
     msg += boost
@@ -68,6 +68,8 @@ def pagina2():
     app.withdraw()
     new_windows()
 
+
+
 money = ctk.CTkLabel(app,text=f"dinheiro: {msg}")
 money.place(x=10,y=-6.2) 
 
@@ -83,9 +85,11 @@ oi.place(relx=0.5, rely=0.9, anchor="center")
 Preço_2x = ctk.CTkLabel(app,text=f"Preço: {Valor}")
 Preço_2x.place(relx=0.7, rely=0.5, anchor="center")
 
+Preço_auto = ctk.CTkLabel(app,text=f"Preço: {Valor_auto}")
+Preço_auto.place(relx=0.7, rely=0.4, anchor="center")
+
 def new_windows():
     app2.deiconify()
 
 
 app.mainloop()
-
