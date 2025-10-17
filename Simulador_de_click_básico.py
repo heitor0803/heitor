@@ -40,9 +40,11 @@ def aclk():
     global msg,boost,boost_pago,aclk_pago
     if not aclk_pago and msg >= 50:
         aclk_pago = True
+        msg= msg - 50
         clicker.configure(text=str(msg))
         money.configure(text=str(msg))
         auto.configure(text='COMPRADO')
+        Preço_auto.configure(text='Preço: --')
         Auto_clicker()
 
 def Auto_clicker():
