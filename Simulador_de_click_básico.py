@@ -1,4 +1,5 @@
 import customtkinter as ctk
+time = 1000
 msg = 0
 boost = 1
 boost_pago = False
@@ -8,8 +9,8 @@ Valor_auto = 50
 def cl():  
     global msg
     msg += boost
-    clicker.configure(text=str(msg))
-    money.configure(text=str(msg))
+    clicker.configure(text=f'{msg:.1f}')
+    money.configure(text=f'{msg:.1f}')
 ctk.set_appearance_mode('Dark')
 
 app = ctk.CTk()
@@ -25,36 +26,40 @@ def pag1():
     app.deiconify()
 
 def x2():
-    global msg,boost,boost_pago,Valor
+    global msg,boost,boost_pago,Valor,time
     if not boost_pago and msg >= Valor:
-        boost += 2
+        boost = boost * 1.7
         msg = msg - Valor
         Valor = Valor * 2
         Preço_2x.configure(text=f"Preço: {Valor}")
-        mltr.configure(text=f'Multiplicador: {boost}')
+        mltr.configure(text=f'Multiplicador: {boost:.1f}')
 
-        clicker.configure(text=str(msg))
-        money.configure(text=str(msg))
+        clicker.configure(text=f'{msg:.1f}')
+        money.configure(text=f'{msg:.1f}')
 
 def aclk():
-    global msg,boost,boost_pago,aclk_pago
+    global msg,boost,boost_pago,aclk_pago,time
     if not aclk_pago and msg >= 50:
         aclk_pago = True
-        msg= msg - 50
-        clicker.configure(text=str(msg))
-        money.configure(text=str(msg))
+        clicker.configure(text=f'{msg:.1f}')
+        money.configure(text=f'{msg:.1f}')
         auto.configure(text='COMPRADO')
-        Preço_auto.configure(text='Preço: --')
+        msg=msg - 50
         Auto_clicker()
 
 def Auto_clicker():
-         global msg,boost,boost_pago,aclk_pago         
+         global msg,boost,boost_pago,aclk_pago,time         
          msg = msg + (boost * 0.5)
-         clicker.configure(text=str(msg))
-         money.configure(text=str(msg))
-         money.after(1000,Auto_clicker)
+         clicker.configure(text=f'{msg:.1f}')
+         money.configure(text=f'{msg:.1f}')
+         money.after(time,Auto_clicker)
 
-
+def SUPER_CLICKER():
+        global msg,boost,boost_pago,aclk_pago,time   
+        if msg >= 1000:
+            time = 100
+            supper_clicker.configure(text='COMPRADO')
+            msg = msg-1000
 
 
 
@@ -70,10 +75,11 @@ def pagina2():
     app.withdraw()
     new_windows()
 
-
-
-money = ctk.CTkLabel(app,text=f"dinheiro: {msg}")
+money = ctk.CTkLabel(app,text=f"dinheiro: {msg:.1f}")
 money.place(x=10,y=-6.2) 
+
+supper_clicker = ctk.CTkButton(app,text='Super Clicker',command=SUPER_CLICKER)
+supper_clicker.place(relx=0.5, rely=0.6, anchor="center")
 
 two = ctk.CTkButton(app,text="2x dinheiro",command= x2)
 two.place(relx=0.5, rely=0.5, anchor="center") 
@@ -81,17 +87,18 @@ two.place(relx=0.5, rely=0.5, anchor="center")
 auto = ctk.CTkButton(app,text="Auto Clicker",command= aclk)
 auto.place(relx=0.5, rely=0.4, anchor="center")
 
+Preço_auto = ctk.CTkLabel(app,text=f"Preço: {Valor_auto}")
+Preço_auto.place(relx=0.7, rely=0.4, anchor="center")
+
 oi=ctk.CTkButton(app,text='Farm', command=pagina2)
 oi.place(relx=0.5, rely=0.9, anchor="center")
 
 Preço_2x = ctk.CTkLabel(app,text=f"Preço: {Valor}")
 Preço_2x.place(relx=0.7, rely=0.5, anchor="center")
 
-Preço_auto = ctk.CTkLabel(app,text=f"Preço: {Valor_auto}")
-Preço_auto.place(relx=0.7, rely=0.4, anchor="center")
-
 def new_windows():
     app2.deiconify()
 
 
 app.mainloop()
+
