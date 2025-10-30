@@ -1,6 +1,5 @@
 import sqlite3 as sq
 import customtkinter as ctk
-from z import *
 banco = sq.connect('primeiro_banco.db')
 cursor = banco.cursor()
 cursor.execute("SELECT * FROM pessoas")
@@ -40,6 +39,7 @@ email.place(relx=0.5, y=600, anchor='center')
 
 banco.commit()
 app1.mainloop()
+
 
 
 
