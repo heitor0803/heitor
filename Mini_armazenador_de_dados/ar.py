@@ -3,7 +3,14 @@ import customtkinter as ctk
 
 banco = sq.connect('primeiro_banco.db')
 cursor = banco.cursor()
-#cursor.execute("CREATE TABLE pessoas (nome text,idade integer,email text)")
+
+cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='pessoas';")
+existe = cursor.fetchone()
+
+if not existe:
+    cursor.execute("CREATE TABLE pessoas (nome text,idade integer,email text)")
+else:
+    pass
 cursor.execute("SELECT * FROM pessoas")
 dados=cursor.fetchall()
 
