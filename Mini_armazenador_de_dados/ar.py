@@ -1,6 +1,6 @@
 import sqlite3 as sq
 import customtkinter as ctk
-
+valor = 0
 banco = sq.connect('primeiro_banco.db')
 cursor = banco.cursor()
 
