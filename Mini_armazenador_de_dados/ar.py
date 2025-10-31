@@ -34,6 +34,8 @@ def delet():
     cursor.execute("SELECT COUNT(*) FROM pessoas")
     quantidade = cursor.fetchone()[0]
     quantidades.configure(text = f'Quantidade de pessoas adicionadas: {quantidade}')
+
+
 def pag2(): 
     app2.deiconify()
     app1.withdraw()
@@ -48,8 +50,14 @@ def adicionar_dados():
     nome = psa.get()
     idade = ida.get()
     email = eml.get()
-    cursor.execute("INSERT INTO pessoas VALUES(?,?,?)",(nome,idade,email))
-    banco.commit()
+    try:
+        cursor.execute("INSERT INTO pessoas VALUES(?,?,?)",(nome,idade,email))
+        banco.commit()
+        ToF.configure(text='Dados adicionados')
+    
+    except:
+        ToF.configure(text='Erro ao adicionar dados')
+
     psa.delete(0, 'end')
     ida.delete(0, 'end')
     eml.delete(0, 'end')
@@ -58,6 +66,7 @@ def adicionar_dados():
 
     cursor.execute("SELECT COUNT(*) FROM pessoas")
     quantidade = cursor.fetchone()[0]
+
     quantidades.configure(text = f'Quantidade de pessoas adicionadas: {quantidade}')
 
 def atualizar():
@@ -79,6 +88,9 @@ tpsa = ctk.CTkLabel(app2, text="Nome:")
 tpsa.place(relx=0.5, y=160, anchor='center')
 psa = ctk.CTkEntry(app2)
 psa.place(relx=0.5, y=180, anchor='center')
+
+ToF = ctk.CTkLabel(app2,text='Aguardando envio')
+ToF.place(relx=0.5, y=350, anchor='center')
 
 tida = ctk.CTkLabel(app2, text="Idade:")
 tida.place(relx=0.5, y=210, anchor='center')
