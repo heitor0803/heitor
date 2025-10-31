@@ -1,9 +1,9 @@
 import sqlite3 as sq
 import customtkinter as ctk
 
-
 banco = sq.connect('primeiro_banco.db')
 cursor = banco.cursor()
+#cursor.execute("CREATE TABLE pessoas (nome text,idade integer,email text)")
 cursor.execute("SELECT * FROM pessoas")
 dados=cursor.fetchall()
 
@@ -24,6 +24,9 @@ def delet():
     nome.configure(text='DELETADO')
     idade.configure(text='DELETADO')
     email.configure(text='DELETADO')
+    cursor.execute("SELECT COUNT(*) FROM pessoas")
+    quantidade = cursor.fetchone()[0]
+    quantidades.configure(text = f'Quantidade de pessoas adicionadas: {quantidade}')
 def pag2(): 
     app2.deiconify()
     app1.withdraw()
@@ -45,8 +48,17 @@ def adicionar_dados():
     eml.delete(0, 'end')
     cursor.execute("SELECT * FROM pessoas")
     dados=cursor.fetchall()
+
     cursor.execute("SELECT COUNT(*) FROM pessoas")
     quantidade = cursor.fetchone()[0]
+    quantidades.configure(text = f'Quantidade de pessoas adicionadas: {quantidade}')
+
+def atualizar():
+    global valor,dados
+    valor = int(escolha.get())-1
+    nome.configure(text=f'Nome: {dados[valor][0]}')
+    idade.configure(text=f'Idade: {dados[valor][1]}')
+    email.configure(text=f'Email: {dados[valor][2]}')
     
 ctk2 = ctk.CTkButton(app2, text="Voltar para pagina principal", command=pag1)
 ctk2.place(relx=0.5, y=485, anchor='center')
@@ -69,23 +81,14 @@ eml.place(relx=0.5, y=280, anchor='center')
 butao2 = ctk.CTkButton(app2, text="Adicionar Dados", command=adicionar_dados)
 butao2.place(relx=0.5, y=320, anchor='center')
 
-
-
-def atualizar():
-    global valor,dados
-    valor = int(escolha.get())
-    nome.configure(text=f'Nome: {dados[valor][0]}')
-    idade.configure(text=f'Idade: {dados[valor][1]}')
-    email.configure(text=f'Email: {dados[valor][2]}')
-
 cursor.execute("SELECT COUNT(*) FROM pessoas")
 quantidade = cursor.fetchone()[0]
 
 ctkl1 = ctk.CTkLabel(app1, text="Banco de Dados com Interface Gráfica")
 ctkl1.place(relx=0.5, y=200, anchor='center')
 
-quantidade = ctk.CTkLabel(app1, text = f'Quantidade de pessoas adicionadas: {quantidade}')
-quantidade.place(relx=0.7, y=40, anchor='center')
+quantidades = ctk.CTkLabel(app1, text = f'Quantidade de pessoas adicionadas: {quantidade}')
+quantidades.place(relx=0.7, y=40, anchor='center')
 
 escolha = ctk.CTkEntry(app1 )
 escolha.place(relx=0.5, y=270, anchor='center')
@@ -97,21 +100,29 @@ butao.place(relx=0.5, y=300, anchor='center')
 
 delete = ctk.CTkButton(app1, text="Deletar esse dado", command = delet)
 delete.place(relx=0.5, y=340, anchor='center')
-nome = ctk.CTkLabel(app1, text=f'Nome: {dados[0][0]}')
-nome.place(relx=0.5, y=400, anchor='center')
+if len(dados) > 0:
+    nome = ctk.CTkLabel(app1, text=f'Nome: {dados[0][0]}')
+    nome.place(relx=0.5, y=400, anchor='center')
 
-idade = ctk.CTkLabel(app1, text=f'idade: {dados[0][1]}')
-idade.place(relx=0.5, y=430, anchor='center')
+    idade = ctk.CTkLabel(app1, text=f'idade: {dados[0][1]}')
+    idade.place(relx=0.5, y=430, anchor='center')
 
-email = ctk.CTkLabel(app1, text=f'email: {dados[0][2]}')
-email.place(relx=0.5, y=460, anchor='center')
+    email = ctk.CTkLabel(app1, text=f'email: {dados[0][2]}')
+    email.place(relx=0.5, y=460, anchor='center')
+else:
+    nome = ctk.CTkLabel(app1, text='Nome: ')
+    nome.place(relx=0.5, y=400, anchor='center')
 
+    idade = ctk.CTkLabel(app1, text='Idade: ')
+    idade.place(relx=0.5, y=430, anchor='center')
+
+    email = ctk.CTkLabel(app1, text='Email: ')
+    email.place(relx=0.5, y=460, anchor='center')
 trocar = ctk.CTkButton(app1, text="Trocar de Janela", command=pag2)
 trocar.place(relx=0.5, y=485, anchor='center')
 
 banco.commit()
 app1.mainloop()
-
 
 
 
