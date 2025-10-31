@@ -8,7 +8,7 @@ cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='pess
 existe = cursor.fetchone()
 
 if not existe:
-    cursor.execute("CREATE TABLE pessoas (nome text,idade integer,email text)")
+    cursor.execute("CREATE TABLE pessoas (nome text,idade integer CHECK(idade >= 0 AND idade <=100),email text CHECK(email LIKE '%@gmail.com'))")
 else:
     pass
 cursor.execute("SELECT * FROM pessoas")
@@ -135,6 +135,5 @@ trocar.place(relx=0.5, y=485, anchor='center')
 
 banco.commit()
 app1.mainloop()
-
 
 
