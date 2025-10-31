@@ -56,10 +56,15 @@ def adicionar_dados():
 def atualizar():
     global valor,dados
     valor = int(escolha.get())-1
-    nome.configure(text=f'Nome: {dados[valor][0]}')
-    idade.configure(text=f'Idade: {dados[valor][1]}')
-    email.configure(text=f'Email: {dados[valor][2]}')
-    
+    if 0 <= valor < len(dados):
+        nome.configure(text=f'Nome: {dados[valor][0]}')
+        idade.configure(text=f'Idade: {dados[valor][1]}')
+        email.configure(text=f'Email: {dados[valor][2]}')
+    else:
+        nome.configure(text='Nome: INVALIDO')
+        idade.configure(text='Idade: INVALIDA')
+        email.configure(text='Email: INVALIDO')
+
 ctk2 = ctk.CTkButton(app2, text="Voltar para pagina principal", command=pag1)
 ctk2.place(relx=0.5, y=485, anchor='center')
 
