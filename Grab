@@ -50,7 +50,7 @@ while True:
         if segurar == True:
             lak= line2[0]-20,line2[1]+10
         segurar= False
-
+    pegar = line2[0]-20,line2[1]-9
     line2= mouse
     
 
@@ -65,7 +65,7 @@ while True:
     if not segurar and a.collidepoint(line2):
         segurar= True
     if segurar == True:
-        lak=line2[0]-20,line2[1]-9
+        lak=pegar
     
 
     pygame.display.update()
