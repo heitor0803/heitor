@@ -1,3 +1,17 @@
-body {
-  background: linear-gradient(to right, rgb(32, 32, 32) 10%, white 50%);
+body{
+    background-color: lightblue
+}
+.centro {
+    text-align: center;
+}
+button {
+    margin-top: 10px;
+
+}
+.caixa {
+    display: inline-block; 
+    border: 1px solid black;
+    padding: 8px 15px;
+    background-color: beige;
+    margin-top: 10px;
 }

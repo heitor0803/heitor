@@ -1,23 +1,22 @@
-// 1. Pega o elemento da imagem usando o ID
-const r2pb = document.getElementById('Logo html')
-// 2. Adiciona um "ouvinte de evento" para o clique
-r2pb.addEventListener('click', function() {
-    // 3. Quando o clique ocorrer, redireciona para a URL desejada
-    window.location.href = 'https://r2pbconfeccoes.com.br/?srsltid=AfmBOoprAsi2L0jMU-mV5QBOiIvq-FY-AfTGFiysNqwLYdd_xfpLbvCr';
-});
+function Soma() {
+    let a= parseFloat(document.getElementById("val1").value);
+    let b = parseFloat( document.getElementById("val2").value)
+    let c = document.getElementById("metodo").value;
+    switch (c) {
+        case "+":
+            respostinha = a+b;
+            break
+        case "-":
+            respostinha = a-b;
+            break
+        case "/":
+            respostinha = a/b;
+            break
+        case "*":
+            respostinha = a*b;
+            break
 
-// 1. Pega o elemento da imagem usando o ID
-const whatsapp=document.getElementById('Whatsapp')
-// 2. Adiciona um "ouvinte de evento" para o clique
-whatsapp.addEventListener('click', function() {
-    // 3. Quando o clique ocorrer, redireciona para a URL desejada
-    window.location.href = 'https://web.whatsapp.com';
-});
+    }
+    document.getElementById("resultado").innerText = respostinha;
 
-// 1. Pega o elemento da imagem usando o ID
-const instagram = document.getElementById('instagram')
-// 2. Adiciona um "ouvinte de evento" para o clique
-instagram.addEventListener('click', function() {
-    // 3. Quando o clique ocorrer, redireciona para a URL desejada
-    window.location.href = 'https://www.instagram.com/r2pbfabricaderoupas/?hl=pt';
-});
+}
