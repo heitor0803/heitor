@@ -15,3 +15,6 @@ button {
     background-color: beige;
     margin-top: 10px;
 }
+#lista {
+    white-space: pre-wrap;
+}
